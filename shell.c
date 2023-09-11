@@ -1,27 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "main.h"
 
 /**
  * main - Entry point
  * Return: Int
- */  
+ */
 
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
-	(void)ac;
-	char *buffer = NULL;
+	(void)argc;
+	(void)argv;
+
+	char *buffer = NULL, **tokens;
 	size_t size_buffer = 0;
 	int n_char = 0;
+	int i = 0;
+	int token_size = 0;
 	
-	write(1, "user: " ,6);
+	write(1, "$ " ,2);
 	n_char = getline(&buffer, &size_buffer, stdin);
 	if (n_char == EOF)
 	{
 		perror("getline");
+		exit(EXIT_FAILURE);
 	}
 	buffer[n_char - 1] = '\0';
-	printf("%s\n", buffer);
+	tokens = commandeSplitter(buffer);
 	return (0);
 	
 }
