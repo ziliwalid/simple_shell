@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	
 	write(1, "$ " ,2);
 	n_char = getline(&buffer, &size_buffer, stdin);
-	if (n_char == EOF)
+	if (n_char == -1)
 	{
 		perror("getline");
 		exit(EXIT_FAILURE);
