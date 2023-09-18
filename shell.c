@@ -28,6 +28,8 @@ int main(void)
 		}
 		/* remove newline character */
 		input[strcspn(input, "\n")] = '\0';
+		if(strcmp(input, "exit") == 0)
+			break;/* this is is to exit the program once we type exit */
 		if (strcmp(input, "env") == 0) 
 		{
 			/* print env vars */
