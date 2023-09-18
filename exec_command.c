@@ -14,7 +14,7 @@ void execute_command(char **args)
 			/* create Child process */
 			if (execvp(args[0], args) == -1)
 			{
-				perror("execvp");
+				printf("%s: not found\n", args[0]);
 				exit(EXIT_FAILURE);
 			}
 		}
