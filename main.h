@@ -1,12 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+extern char **environ; /* declare environ */
 
-char **commandeSplitter(char *str);
-int main(int argc, char **argv);
+void parse(char* input, char** args);
+int is_interactive(void);
+void execute_command(char** args);
 
 #endif
+

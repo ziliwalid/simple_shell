@@ -1,30 +1,52 @@
 #include "main.h"
 
-/**
- * main - Entry point
- * Return: Int
- */
 
-int main(int argc, char **argv)
+/* constants */
+#define MAX_INPUT_SIZE 1024
+#define MAX_ARG_SIZE 100
+
+int is_interactive(void);
+
+int main(void)
 {
-	(void)argc;
-	(void)argv;
-
-	char *buffer = NULL, **tokens;
-	size_t size_buffer = 0;
-	int n_char = 0;
-	int i = 0;
-	int token_size = 0;
+	char input[MAX_INPUT_SIZE];
+	char* args[MAX_ARG_SIZE];
+	char **env = environ;
+	int is_interactive_mode = is_interactive();
 	
-	write(1, "$ " ,2);
-	n_char = getline(&buffer, &size_buffer, stdin);
-	if (n_char == -1)
+	while (1) 
 	{
-		perror("getline");
-		exit(EXIT_FAILURE);
+		if (is_interactive_mode) 
+		{
+			printf("($) ");
+			fflush(stdout);
+		}
+		if (fgets(input, MAX_INPUT_SIZE, stdin) == NULL) 
+		{
+			/* handle end of file case (ctrl+d) */
+			break;
+		}
+		/* remove newline character */
+		input[strcspn(input, "\n")] = '\0';
+		if (strcmp(input, "env") == 0) 
+		{
+			/* print env vars */
+			while (*env)
+			{
+				printf("%s\n", *env);
+				env++;
+			}
+		}
+		else 
+		{
+			parse(input, args);
+			execute_command(args);
+		}
 	}
-	buffer[n_char - 1] = '\0';
-	tokens = commandeSplitter(buffer);
 	return (0);
-	
+}
+
+int is_interactive(void)
+{
+	return (isatty(STDIN_FILENO));
 }
