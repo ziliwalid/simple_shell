@@ -1,6 +1,10 @@
 #include "main.h"
 
-
+/**
+  * execute_command - execs a command and it's child process
+  * @args: command param
+  * Return: void, nada :)
+  */
 
 void execute_command(char **args)
 {
