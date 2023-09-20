@@ -1,15 +1,15 @@
 #include "main.h"
 
-/**
-  * main - Entry point of the shell
-  * Return: 0
-  */
 /* constants */
 #define MAX_INPUT_SIZE 1024
 #define MAX_ARG_SIZE 100
 
 int is_interactive(void);
 
+/**
+  * main - Entry point of the shell
+  * Return: 0
+  */
 int main(void)
 {
 	char input[MAX_INPUT_SIZE];
